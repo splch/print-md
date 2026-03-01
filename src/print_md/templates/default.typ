@@ -6,6 +6,9 @@
 // Horizontal rules: Pandoc outputs #horizontalrule for ---
 #let horizontalrule = line(length: 100%, stroke: 0.5pt + luma(200))
 
+// Block quotes: Pandoc outputs #blockquote for > syntax
+#let blockquote(body) = quote(block: true, body)
+
 // Definition lists
 #show terms.item: it => block(breakable: false)[
   #text(weight: "bold")[#it.term]

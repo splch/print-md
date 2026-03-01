@@ -5,6 +5,9 @@
 
 #let horizontalrule = line(length: 100%, stroke: 0.5pt + luma(160))
 
+// Block quotes: Pandoc outputs #blockquote for > syntax
+#let blockquote(body) = quote(block: true, body)
+
 #show terms.item: it => block(breakable: false)[
   #text(weight: "bold")[#it.term]
   #block(inset: (left: 1.5em, top: -0.4em))[#it.description]
