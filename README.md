@@ -83,6 +83,19 @@ print_md document.md --highlight-style espresso
 
 Available styles: `pygments`, `tango`, `espresso`, `zenburn`, `kate`, `monochrome`, `breezedark`, `haddock`.
 
+### Mermaid diagrams
+
+If `mmdc` is installed, fenced code blocks with the `mermaid` class are automatically rendered as SVG diagrams:
+
+````markdown
+```mermaid
+graph LR
+    A[Markdown] --> B[Pandoc] --> C[PDF]
+```
+````
+
+If `mmdc` is not installed, mermaid blocks render as plain code. Install with `npm install -g @mermaid-js/mermaid-cli`.
+
 ### LaTeX engine
 
 If you have a TeX distribution installed, you can use XeLaTeX instead of Typst:
@@ -107,6 +120,7 @@ print_md document.md --pandoc-args "--shift-heading-level-by=-1"
 - **Task lists** — `- [x]` / `- [ ]` checkboxes
 - **Footnotes**
 - **Blockquotes**
+- **Mermaid diagrams** — rendered to SVG automatically when `mmdc` is installed
 - **Images**
 - **Links**
 - **Definition lists**
@@ -172,6 +186,7 @@ pytest tests/ -v
 - [Pandoc](https://pandoc.org/installing.html) (required)
 - [Typst](https://github.com/typst/typst#installation) (required for default engine)
 - XeLaTeX (optional, for `--engine latex`)
+- [@mermaid-js/mermaid-cli](https://github.com/mermaid-js/mermaid-cli) (optional, for mermaid diagrams — `npm install -g @mermaid-js/mermaid-cli`)
 
 ## License
 

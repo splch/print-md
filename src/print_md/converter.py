@@ -90,6 +90,11 @@ def build_pandoc_command(
     elif engine == "latex":
         cmd += ["--pdf-engine=xelatex"]
 
+    # Mermaid diagram filter (engine-agnostic, auto-detects mmdc)
+    mermaid_filter = FILTERS_DIR / "mermaid.lua"
+    if mermaid_filter.exists():
+        cmd += [f"--lua-filter={mermaid_filter}"]
+
     # Table of contents
     if toc:
         cmd += ["--toc", f"--toc-depth={toc_depth}"]

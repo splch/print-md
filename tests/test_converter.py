@@ -113,8 +113,29 @@ def test_lua_filter_included(mock_engine, mock_pandoc, sample_md, tmp_path):
     output = tmp_path / "test.pdf"
     cmd = build_pandoc_command([sample_md], output)
     filter_args = [a for a in cmd if a.startswith("--lua-filter=")]
+    assert len(filter_args) == 2
+    assert any("task-list.lua" in a for a in filter_args)
+    assert any("mermaid.lua" in a for a in filter_args)
+
+
+@patch("print_md.converter.require_pandoc", return_value="/usr/bin/pandoc")
+@patch("print_md.converter.require_engine", return_value="/usr/bin/xelatex")
+def test_mermaid_filter_included_latex(mock_engine, mock_pandoc, sample_md, tmp_path):
+    """Mermaid filter is included for LaTeX engine (engine-agnostic)."""
+    output = tmp_path / "test.pdf"
+    cmd = build_pandoc_command([sample_md], output, engine="latex")
+    filter_args = [a for a in cmd if "mermaid.lua" in a]
     assert len(filter_args) == 1
-    assert "task-list.lua" in filter_args[0]
+
+
+@patch("print_md.converter.require_pandoc", return_value="/usr/bin/pandoc")
+@patch("print_md.converter.require_engine", return_value="/usr/bin/xelatex")
+def test_task_list_filter_not_included_latex(mock_engine, mock_pandoc, sample_md, tmp_path):
+    """Task-list filter is Typst-specific and should not appear for LaTeX."""
+    output = tmp_path / "test.pdf"
+    cmd = build_pandoc_command([sample_md], output, engine="latex")
+    filter_args = [a for a in cmd if "task-list.lua" in a]
+    assert len(filter_args) == 0
 
 
 @patch("print_md.converter.require_pandoc", return_value="/usr/bin/pandoc")

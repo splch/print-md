@@ -40,6 +40,12 @@ def check_latex() -> tuple[bool, str | None]:
     return (ver is not None, ver)
 
 
+def check_mmdc() -> tuple[bool, str | None]:
+    """Return (available, version_string) for mmdc (mermaid-cli)."""
+    ver = _run_version("mmdc")
+    return (ver is not None, ver)
+
+
 def require_pandoc() -> str:
     """Return pandoc path or raise SystemExit."""
     path = shutil.which("pandoc")
@@ -97,5 +103,11 @@ def format_check_deps() -> str:
         lines.append(f"  xelatex: OK  ({latex_ver})")
     else:
         lines.append("  xelatex: not found (optional, for --engine=latex)")
+
+    mmdc_ok, mmdc_ver = check_mmdc()
+    if mmdc_ok:
+        lines.append(f"  mmdc:    OK  ({mmdc_ver})")
+    else:
+        lines.append("  mmdc:    not found (optional, for mermaid diagrams)")
 
     return "\n".join(lines)

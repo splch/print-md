@@ -45,6 +45,7 @@ def test_check_deps(runner):
     assert result.exit_code == 0
     assert "pandoc:" in result.output
     assert "typst:" in result.output
+    assert "mmdc:" in result.output
 
 
 def test_list_themes(runner):

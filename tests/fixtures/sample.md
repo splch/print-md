@@ -121,6 +121,18 @@ Term 1
 Term 2
 :   Definition for term 2, with more detail.
 
+## Mermaid Diagram
+
+```mermaid
+graph LR
+    A[Markdown] --> B[Pandoc]
+    B --> C{Engine}
+    C -->|typst| D[Typst]
+    C -->|latex| E[XeLaTeX]
+    D --> F[PDF]
+    E --> F
+```
+
 ## Horizontal Rule
 
 ---
