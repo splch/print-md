@@ -87,6 +87,16 @@ def build_pandoc_command(
         if task_list_filter.exists():
             cmd += [f"--lua-filter={task_list_filter}"]
 
+        # Callout filter (note/tip fenced divs)
+        callout_filter = FILTERS_DIR / "callout.lua"
+        if callout_filter.exists():
+            cmd += [f"--lua-filter={callout_filter}"]
+
+        # Auto-size table columns
+        auto_table_filter = FILTERS_DIR / "auto-table.lua"
+        if auto_table_filter.exists():
+            cmd += [f"--lua-filter={auto_table_filter}"]
+
     elif engine == "latex":
         cmd += ["--pdf-engine=xelatex"]
 

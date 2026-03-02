@@ -8,6 +8,27 @@
 // Block quotes: Pandoc outputs #blockquote for > syntax
 #let blockquote(body) = quote(block: true, body)
 
+// Callout boxes for fenced divs (::: note, ::: tip)
+#let callout-note(body) = block(
+  width: 100%,
+  stroke: (left: 2pt + rgb("#60a5fa")),
+  fill: rgb("#f8fafc"),
+  inset: (left: 10pt, right: 8pt, y: 6pt),
+  above: 0.8em,
+  below: 0.8em,
+  body,
+)
+
+#let callout-tip(body) = block(
+  width: 100%,
+  stroke: (left: 2pt + rgb("#4ade80")),
+  fill: rgb("#f8fdf9"),
+  inset: (left: 10pt, right: 8pt, y: 6pt),
+  above: 0.8em,
+  below: 0.8em,
+  body,
+)
+
 #show terms.item: it => block(breakable: false)[
   #text(weight: "bold")[#it.term]
   #block(inset: (left: 1.5em, top: -0.4em))[#it.description]

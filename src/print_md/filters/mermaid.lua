@@ -53,7 +53,7 @@ function CodeBlock(el)
 
   -- Run mmdc to render PNG
   local cmd = string.format(
-    'mmdc -i "%s" -o "%s" -b transparent --quiet -s 4 2>&1',
+    'mmdc -i "%s" -o "%s" -b transparent --quiet -s 4 --theme neutral 2>&1',
     input_file, output_file
   )
   local handle = io.popen(cmd)
