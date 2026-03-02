@@ -78,8 +78,8 @@ $if(monofont)$
 #show raw: set text(font: "$monofont$")
 $endif$
 
-// Numbered headings (always on for academic)
-#set heading(numbering: "1.1.1")
+// Numbered headings (off by default; use --number-sections to enable)
+// #set heading(numbering: "1.1.1")
 
 // --- Heading styles ---
 
